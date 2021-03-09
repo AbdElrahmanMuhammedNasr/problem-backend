@@ -21,9 +21,9 @@ exports.addUser = async (req, res, next) => {
 }
 
 exports.getUser = async (req, res, next) => {
-    const {email} = req.params;
+    const {id} = req.params;
 
-    const user = await User.findOne({'email': email}, '-__v');
+    const user = await User.findOne({'_id': id}, '-__v');
 
     if (user === null) {
         return res.status(200).json({

@@ -22,7 +22,7 @@ exports.getSomePostsUsingGategory = async (req, res, next) => {
 exports.getUserPosts = async (req, res, next) => {
     const {userId} = req.params;
 
-    const result = await Post.find({'userId': userId}, 'userId  title description').limit(20);
+    const result = await Post.find({'userId': userId}, 'title description created').limit(20);
     if (result === null) {
         return res.status(200).json([]);
     }
