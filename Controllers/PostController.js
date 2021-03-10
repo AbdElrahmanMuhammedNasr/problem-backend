@@ -1,17 +1,48 @@
 const Post = require('../DatabaseSchema/post');
 
 exports.getSomePosts = async (req, res, next) => {
-    const result = await Post.find({},'-__v  -category -solution -problem').limit(20);
+    // const result = await Post.find({},'-__v  -category -solution -problem') //  not useful i need it random
+    const result = await Post.aggregate([
+        {$sample: {size: 10}},
+        {
+            $project:
+                {
+                    userId: '$userId',
+                    title: '$title',
+                    description: '$description',
+
+                }
+        }
+    ])
+
+
     if (result === null) {
         return res.status(200).json([]);
     }
     res.status(200).json(result);
 }
 
-exports.getSomePostsUsingGategory = async (req, res, next) => {
+
+exports.getSomePostsUsingCategory = async (req, res, next) => {
+
     const {category} = req.params;
 
-    const result = await Post.find({'category': category}, 'userId  title description').limit(20);
+    // const result = await Post.find({'category': category}, 'userId  title description')
+
+    const result = await Post.aggregate([
+        {$match: {category: category}},
+        {$sample: {size: 10}},
+        {
+            $project:
+                {
+                    userId: '$userId',
+                    title: '$title',
+                    description: '$description',
+
+                }
+        }
+    ])
+
     if (result === null) {
         return res.status(200).json([]);
     }
