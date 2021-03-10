@@ -10,6 +10,8 @@ exports.getSomePosts = async (req, res, next) => {
                     userId: '$userId',
                     title: '$title',
                     description: '$description',
+                    created:'$created'
+
 
                 }
         }
@@ -38,6 +40,7 @@ exports.getSomePostsUsingCategory = async (req, res, next) => {
                     userId: '$userId',
                     title: '$title',
                     description: '$description',
+                    created:'$created'
 
                 }
         }
