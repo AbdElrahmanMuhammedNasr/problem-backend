@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 
 const  users = require('./Routes/UserRoutes')
 const  posts = require('./Routes/PostRoutes')
+const comment = require('./Routes/CommentRoutes')
 
 
 app.use((req, res, next) => {
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 app.use('/user', users)
 app.use('/post', posts)
+app.use('/comment', comment)
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/problem',{ useFindAndModify: false })
