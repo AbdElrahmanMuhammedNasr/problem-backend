@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
 
+const auth = require('./Routes/AuthRoutes')
 const  users = require('./Routes/UserRoutes')
 const  posts = require('./Routes/PostRoutes')
 const comment = require('./Routes/CommentRoutes')
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 })
 
 
+app.use('/auth', auth)
 app.use('/user', users)
 app.use('/post', posts)
 app.use('/comment', comment)

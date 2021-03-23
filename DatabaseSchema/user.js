@@ -8,6 +8,9 @@ const UserSchema = new Schema({
     }, description: {
         type: String,
         required: false
+    },password:{
+        type: String,
+        required: false
     }, email: {
         type: String,
         required: true,

@@ -1,12 +1,16 @@
 const User = require('../DatabaseSchema/user');
 const Post = require('../DatabaseSchema/post');
+const bycrpt = require('bcryptjs')
 
 
 exports.addUser = async (req, res, next) => {
     const userBody = req.body;
 
+    const hashPassword = await bycrpt.hash(userBody.password,10);
+    
     const user = new User({
         ...userBody,
+        password:hashPassword,
         following: 0,
         followers: 0,
         created: new Date()
@@ -15,7 +19,6 @@ exports.addUser = async (req, res, next) => {
     const result = await user.save().catch(err => {
         res.status(406).json(err.errmsg)
     });
-    // res.status(200).json(result['_id'])
     res.status(200).json(result)
 
 }
